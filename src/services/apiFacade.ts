@@ -22,12 +22,23 @@ async function getDisciplines(): Promise<Discipline[]> {
 }
 
 async function getParticipants(): Promise<Participant[]> {
+  console.log("getParticipants");
+  
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
   };
   const options = makeOptions("GET", null, headers, true);
   return fetch(API_URL + "/participants", options).then(handleHttpErrors);
+}
+
+async function getParticipantById(id: number): Promise<Participant> {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const options = makeOptions("GET", null, headers, true);
+  return fetch(API_URL + "/participants/" + id, options).then(handleHttpErrors);
 }
 
 async function createResult(result: Result): Promise<Result> {
@@ -115,6 +126,7 @@ export {
   getResults,
   getDisciplines,
   getParticipants,
+  getParticipantById,
   createResult,
   createDiscipline,
   createParticipant,

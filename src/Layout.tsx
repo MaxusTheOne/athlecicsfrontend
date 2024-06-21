@@ -9,16 +9,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const BlankBackLocations = [
-    "/login",
-    "/new-account",
-    "/users/add",
-    "/equipment/add",
-    "/schedule/add",
-    "/users/",
-    "/equipment/",
-    "/sell/admin-panel/",
-    "/schedule/",
-    "/reservations/",
+    "/participant-detail"
   ];
 
   const useIsBlankBackPage = (BlankBackLocations: string[]) => {

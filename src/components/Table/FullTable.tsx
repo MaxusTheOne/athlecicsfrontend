@@ -153,12 +153,6 @@ const FullTable = <
     return matchesSearchTerm && matchesRole;
   });
 
-  // Handle role filter change
-  const handleRoleFilterChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setSelectedRole(event.target.value);
-  };
 
   // Handle add click
   const handleAddClick = () => {
@@ -176,22 +170,7 @@ const FullTable = <
           placeholder="Search"
           onChange={handleSearchChange}
         />
-        {roleFilter && (
-          <>
-            <label htmlFor="table-role-filter">Role:</label>
-            <select
-              name="role"
-              id="table-role-filter"
-              value={selectedRole}
-              onChange={handleRoleFilterChange}
-            >
-              <option value="all">All</option>
-              <option value="ADMIN">Administrator</option>
-              <option value="STAFF">Staff</option>
-              <option value="USER">User</option>
-            </select>
-          </>
-        )}
+      
         {createButton && (
           <button className="add-button" onClick={handleAddClick}>
             Add

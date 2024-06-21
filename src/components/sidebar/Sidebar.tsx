@@ -93,7 +93,7 @@ function Sidebar() {
                 className="row-title"
                 style={{ display: isOpen ? "block" : "none" }}
               >
-                <p>Kea Bowling</p>
+                <p>Menu</p>
               </div>
             </NavLink>
           </li>

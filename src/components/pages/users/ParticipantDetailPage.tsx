@@ -1,55 +1,53 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  deleteUser,
-  getUserById,
-  updateUser,
-} from "../../../Services/apiFacade";
-import "./UserDetailPage.css";
+  deleteParticipant,
+  getParticipantById,
+  updateParticipant,
+} from "../../../services/apiFacade";
+import "./ParticipantDetailPage.css";
 
-interface UserToUpdate {
+export interface Participant {
   id: number;
-  email: string;
-  roles: string[];
-  username: string;
-  created: Date;
+  name: string;
+  age: number;
+  club: string;
 }
 
-export default function UsersDetailPage() {
+export default function ParticipantDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [user, setUser] = useState<UserToUpdate>({
+  const [participant, setParticipant] = useState<Participant>({
     id: 0,
-    created: new Date(),
-    email: "",
-    roles: [],
-    username: "",
+    name: "",
+    age: 0,
+    club: "",
   });
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const res = await getUserById(Number(id));
-      setUser({ ...res });
+    const fetchParticipant = async () => {
+      const res = await getParticipantById(Number(id));
+      setParticipant({ ...res });
       setFormState({
         ...res,
       });
       console.log(res);
     };
-    fetchUser();
+    fetchParticipant();
   }, [id]);
 
-  const [formState, setFormState] = useState({
-    ...user,
+  const [formState, setFormState] = useState<Participant>({
+    ...participant,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (!user) {
+    if (!participant) {
       return;
     }
     setFormState((prevState) => {
       const defaultState = prevState || {
-        ...user,
+        ...participant,
       };
       return {
         ...defaultState,
@@ -60,135 +58,71 @@ export default function UsersDetailPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!user) {
+    if (!participant) {
       return;
     }
     try {
-      await updateUser({ ...formState });
-      navigate("/users");
+      await updateParticipant({ ...formState });
+      navigate("/participants");
     } catch {
-      console.error("Error updating user");
-      navigate("/users");
+      console.error("Error updating participant");
+      navigate("/participants");
     }
   };
 
   const handleDelete = async () => {
-    if (!user) {
+    if (!participant) {
       return;
     }
     try {
-      await deleteUser(user.id);
-      navigate("/users");
+      await deleteParticipant(participant.id);
+      navigate("/participants");
     } catch {
-      console.error("Error deleting user");
-      navigate("/users");
+      console.error("Error deleting participant");
+      navigate("/participants");
     }
   };
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked, value } = e.target;
-    setUser((prev) => {
-      if (checked) {
-        // If the checkbox is checked, add its value to the roles array
-        return { ...prev, roles: [...prev.roles, value] };
-      } else {
-        // If the checkbox is unchecked, remove its value from the roles array
-        return { ...prev, roles: prev.roles.filter((role) => role !== value) };
-      }
-    });
-    setFormState((prev) => {
-      if (checked) {
-        // If the checkbox is checked, add its value to the roles array
-        return { ...prev, roles: [...prev.roles, value] };
-      } else {
-        // If the checkbox is unchecked, remove its value from the roles array
-        return { ...prev, roles: prev.roles.filter((role) => role !== value) };
-      }
-    });
-  };
-
   return (
-    <div className="user-detail-page">
-      {/* Form for a User with input */}
+    <div className="participant-detail-page">
+      {/* Form for a Participant with input */}
       <form
-        id="user-form-container"
+        id="participant-form-container"
         className="form-container"
         onSubmit={handleSubmit}
       >
-        <h1>User Detail Page</h1>
-        <label className="form-label">ID: {user?.id}</label>
+        <h1>Participant Detail Page</h1>
+        <label className="form-label">ID: {participant?.id}</label>
 
-        <label className="form-label">Created:</label>
-        <input
-          className="form-input"
-          type="dateTime-local"
-          name="Date Created"
-          value={formState?.created.toString()}
-          readOnly
-        />
-        <label className="form-label">Email:</label>
+        <label className="form-label">Name:</label>
         <input
           className="form-input"
           type="text"
-          name="email"
-          value={formState?.email}
+          name="name"
+          value={formState?.name}
           onChange={handleChange}
           required
         />
 
-        <label className="form-label">Username:</label>
+        <label className="form-label">Age:</label>
         <input
           className="form-input"
-          type="text"
-          name="username"
-          value={formState?.username}
+          type="number"
+          name="age"
+          value={formState?.age}
           onChange={handleChange}
           required
         />
-        <label className="label">Roles:</label>
-        <div className="choice-container">
-          <label htmlFor="admin">Admin</label>
-          <input
-            type="checkbox"
-            id="admin"
-            name="roles"
-            value="ADMIN"
-            checked={user.roles.includes("ADMIN")}
-            onChange={handleCheckboxChange}
-          />
-        </div>
-        <div className="choice-container">
-          <label htmlFor="reservationStaff">Reservation Staff</label>
-          <input
-            type="checkbox"
-            id="reservationStaff"
-            name="roles"
-            value="RESERVATION_STAFF"
-            checked={user.roles.includes("RESERVATION_STAFF")}
-            onChange={handleCheckboxChange}
-          />
-        </div>
-        <div className="choice-container">
-          <label htmlFor="equipmentOperator">Equipment Operator</label>
-          <input
-            type="checkbox"
-            id="equipmentOperator"
-            name="roles"
-            value="EQUIPMENT_OPERATOR"
-            checked={user.roles.includes("EQUIPMENT_OPERATOR")}
-            onChange={handleCheckboxChange}
-          />
-        </div>
-        <div className="choice-container">
-          <label htmlFor="shiftManager">Regular Staff</label>
-          <input
-            type="checkbox"
-            id="staff"
-            name="roles"
-            value="STAFF"
-            checked={user.roles.includes("STAFF")}
-            onChange={handleCheckboxChange}
-          />
-        </div>
+
+        <label className="form-label">Club:</label>
+        <input
+          className="form-input"
+          type="text"
+          name="club"
+          value={formState?.club}
+          onChange={handleChange}
+          required
+        />
+
         <div className="choice-container">
           <button className="delete-button" onClick={handleDelete}>
             Delete

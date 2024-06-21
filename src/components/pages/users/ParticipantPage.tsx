@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FullTable from "../../Table/FullTable";
-import "./UsersPage.css";
+import "./ParticipantPage.css";
 import { getParticipants } from "../../../services/apiFacade";
 import { Participant } from "../../../types";
 
@@ -50,18 +50,7 @@ export default function ParticipantPage() {
             type: "string",
             searchByValue: true,
           },
-          {
-            header: "Last Edit",
-            accessorKey: "edited",
-            type: "date",
-            searchByValue: false,
-          },
-          {
-            header: "Date Created",
-            accessorKey: "created",
-            type: "date",
-            searchByValue: false,
-          },
+          
         ]}
         roleFilter={true}
         data={participants.map((item) => ({

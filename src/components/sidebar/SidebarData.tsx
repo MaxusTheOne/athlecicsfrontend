@@ -10,47 +10,24 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 // If you want to change the order, you will have to do it both in the Routes.tsx and in the SidebarData.
 
 export const SidebarData = [
+  
   {
-    title: "Log in",
-    role: ["GUEST"],
+    title: "Participants",
+    role: [],
     icon: <AccountCircleIcon />,
-    route: "/login",
+    route: "/participants",
   },
   {
-    title: "My Page",
-    role: ["ADMIN", "EquipmentOperator", "STAFF", "USER"],
-    icon: <AccountCircleIcon />,
-    route: "/my-page",
-  },
-  {
-    title: "Work Schedule",
-    role: ["ADMIN", "EquipmentOperator", "STAFF"],
-    icon: <ScheduleIcon />,
-    route: "/schedule",
-  },
-
-  {
-    title: "Sell Amenities",
-    role: ["ADMIN", "STAFF"],
-    icon: <FastfoodIcon />,
-    route: "/sell",
-  },
-  {
-    title: "All Reservations",
-    role: ["ADMIN", "STAFF"],
+    title: "Results",
+    role: [],
     icon: <AssignmentIcon />,
-    route: "/reservations",
+    route: "/results",
   },
   {
-    title: "Equipment",
-    role: ["ADMIN", "EquipmentOperator"],
+    title: "Disciplines",
+    role: [],
     icon: <ConstructionIcon />,
-    route: "/equipment",
+    route: "/disciplines",
   },
-  {
-    title: "Users",
-    role: ["ADMIN"],
-    icon: <PeopleAltIcon />,
-    route: "/users",
-  },
+ 
 ];

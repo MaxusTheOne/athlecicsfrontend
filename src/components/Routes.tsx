@@ -1,12 +1,49 @@
-import UsersPage from "./pages/users/UsersPage";
+import ParticipantDetailPage from "./pages/users/ParticipantDetailPage";
+import ParticipantPage from "./pages/users/ParticipantPage";
+import UsersPage from "./pages/users/ParticipantPage";
+import ParticipantPageAdd from "./pages/users/ParticipantPageAdd";
 
 
 const AppRoutes = [
    {
-     path: "/my-page",
+     path: "/participants",
      Element: () => (
        
-         <UsersPage />
+         <ParticipantPage />
+      
+     ),
+  },
+   {
+     path: "/participants/add",
+     Element: () => (
+       
+         <ParticipantPageAdd />
+      
+     ),
+  },
+  
+   {
+     path: "/participants/:id",
+     Element: () => (
+       
+         <ParticipantDetailPage />
+      
+     ),
+  },
+  
+   {
+     path: "/results",
+     Element: () => (
+       
+         <ParticipantPage />
+      
+     ),
+  },
+   {
+     path: "/disciplines",
+     Element: () => (
+       
+         <ParticipantPage />
       
      ),
   },
