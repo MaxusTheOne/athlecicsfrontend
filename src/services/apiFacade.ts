@@ -63,6 +63,7 @@ async function getResultById(id: number): Promise<Result> {
 }
 
 async function createDiscipline(discipline: Discipline): Promise<Discipline> {
+  
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -125,6 +126,15 @@ async function deleteDiscipline(id: number): Promise<void> {
   return fetch(API_URL + "/disciplines/" + id, options).then(handleHttpErrors);
 }
 
+async function getDisciplineById(id: number): Promise<Discipline> {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const options = makeOptions("GET", null, headers, true);
+  return fetch(API_URL + "/disciplines/" + id, options).then(handleHttpErrors);
+}
+
 async function deleteParticipant(id: number): Promise<void> {
   const token = localStorage.getItem("token");
   const headers = {
@@ -148,5 +158,6 @@ export {
   updateParticipant,
   deleteResult,
   deleteDiscipline,
+  getDisciplineById,
   deleteParticipant,
 };

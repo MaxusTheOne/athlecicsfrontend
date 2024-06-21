@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./ParticipantPageAdd.css";
 import { useNavigate } from "react-router-dom";
 import { Participant } from "../../../types";
+import { createParticipant } from "../../../services/apiFacade";
 
 export default function ParticipantPageAdd() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export default function ParticipantPageAdd() {
     event.preventDefault();
 
     console.log(participant);
+    createParticipant(participant)
+    navigate("/participants");
   }
 
   return (

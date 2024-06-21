@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Result } from "../../../types";
+import { createResult } from "../../../services/apiFacade";
 
 export default function ResultsPageAdd() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function ResultsPageAdd() {
     event.preventDefault();
 
     console.log(result);
+    createResult(result)
   }
 
   return (

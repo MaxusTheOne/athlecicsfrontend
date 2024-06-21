@@ -86,16 +86,9 @@ function Sidebar() {
           <li
             id="sidebar-logo"
             className={location.pathname === "/" ? "row active" : "row"}
-          >
-            <NavLink to="/">
-              <img src="../../../public/Logo.png" alt="" className="row-icon" />
-              <div
-                className="row-title"
-                style={{ display: isOpen ? "block" : "none" }}
-              >
-                <p>Menu</p>
-              </div>
-            </NavLink>
+          > 
+          {/* rip pusheen logo */}
+            
           </li>
 
           {sidebarList}

@@ -1,69 +1,60 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Result } from "../../../types";
+import { Discipline } from "../../../types";
+import { createDiscipline } from "../../../services/apiFacade";
 
-export default function ResultsPageAdd() {
+export default function DisciplinesPageAdd() {
   const navigate = useNavigate();
   const [err, setErr] = useState("");
-  const [result, setResult] = useState<Result>({
+  const [discipline, setDiscipline] = useState<Discipline>({
     id: 0,
-    discipline: "",
-    participant: "",
-    result: "",
+    disciplineName: "",
+    disciplineType: "",
+    resultsId: [],
   });
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    console.log(result);
+    console.log(discipline);
+    createDiscipline(discipline)
+
+    
   }
 
   return (
     <div id="participant-page-add-container">
       <form className="form-container" onSubmit={handleSubmit}>
-        <h1>Add a new result to the system</h1>
-        <label className="label" htmlFor="discipline">
-          Discipline:
+        <h1>Add a new discipline to the system</h1>
+        <label className="label" htmlFor="disciplineName">
+          Discipline Name:
         </label>
         <input
           className="form-field"
           type="text"
-          id="discipline"
-          name="discipline"
+          id="disciplineName"
+          name="disciplineName"
           onChange={(e) =>
-            setResult((prev) => ({ ...prev, discipline: e.target.value }))
+            setDiscipline((prev) => ({ ...prev, disciplineName: e.target.value }))
           }
           required
         />
-        <label className="label" htmlFor="participant">
-          Participant:
+        <label className="label" htmlFor="disciplineType">
+          Discipline Type:
         </label>
         <input
           className="form-field"
           type="text"
-          id="participant"
-          name="participant"
+          id="disciplineType"
+          name="disciplineType"
           onChange={(e) =>
-            setResult((prev) => ({ ...prev, participant: e.target.value }))
-          }
-          required
-        />
-        <label className="label" htmlFor="result">
-          Result:
-        </label>
-        <input
-          className="form-field"
-          type="text"
-          id="result"
-          name="result"
-          onChange={(e) =>
-            setResult((prev) => ({ ...prev, result: e.target.value }))
+            setDiscipline((prev) => ({ ...prev, disciplineType: e.target.value }))
           }
           required
         />
 
         <button className="form-button" type="submit">
-          Add Result
+          Add Discipline
         </button>
         {err && <p className="form-error">{err}</p>}
       </form>
