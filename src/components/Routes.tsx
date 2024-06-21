@@ -1,7 +1,12 @@
-import ParticipantDetailPage from "./pages/users/ParticipantDetailPage";
-import ParticipantPage from "./pages/users/ParticipantPage";
-import UsersPage from "./pages/users/ParticipantPage";
-import ParticipantPageAdd from "./pages/users/ParticipantPageAdd";
+import DisciplinesDetailPage from "./pages/disciplines/DisciplinesDetailPage";
+import DisciplinesPage from "./pages/disciplines/DisciplinesPage";
+import DisciplinesPageAdd from "./pages/disciplines/DisciplinesPageAdd";
+import ParticipantDetailPage from "./pages/partiscipants/ParticipantDetailPage";
+import ParticipantPage from "./pages/partiscipants/ParticipantPage";
+import ParticipantPageAdd from "./pages/partiscipants/ParticipantPageAdd";
+import ResultsDetailPage from "./pages/results/ResultsDetailPage";
+import ResultsPage from "./pages/results/ResultsPage";
+import ResultsPageAdd from "./pages/results/ResultsPageAdd";
 
 
 const AppRoutes = [
@@ -30,12 +35,28 @@ const AppRoutes = [
       
      ),
   },
-  
    {
      path: "/results",
      Element: () => (
        
-         <ParticipantPage />
+         <ResultsPage />
+      
+     ),
+  },
+   {
+     path: "/results/add",
+     Element: () => (
+       
+         <ResultsPageAdd />
+      
+     ),
+  },
+  
+   {
+     path: "/results/:id",
+     Element: () => (
+       
+         <ResultsDetailPage />
       
      ),
   },
@@ -43,19 +64,37 @@ const AppRoutes = [
      path: "/disciplines",
      Element: () => (
        
-         <ParticipantPage />
+         <DisciplinesPage />
       
      ),
   },
-
+   {
+     path: "/disciplines/add",
+     Element: () => (
+       
+         <DisciplinesPageAdd />
+      
+     ),
+  },
+  
+   {
+     path: "/disciplines/:id",
+     Element: () => (
+       
+         <DisciplinesDetailPage />
+      
+     ),
+  },
+  
+  
   // ROUTES NOT IN SIDEBAR
   {
     path: "/",
-    Element: UsersPage,
+    Element: ParticipantPage,
   },
   {
     path: "*",
-    Element: UsersPage,
+    Element: ParticipantPage,
   },
 ];
 

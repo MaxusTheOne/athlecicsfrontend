@@ -9,7 +9,10 @@ async function getResults(): Promise<Result[]> {
     Authorization: `Bearer ${token}`,
   };
   const options = makeOptions("GET", null, headers, true);
-  return fetch(API_URL + "/results", options).then(handleHttpErrors);
+  const resultResult = await fetch(API_URL + "/results", options).then(handleHttpErrors);
+  console.log(resultResult);
+  
+  return resultResult;
 }
 
 async function getDisciplines(): Promise<Discipline[]> {
@@ -48,6 +51,15 @@ async function createResult(result: Result): Promise<Result> {
   };
   const options = makeOptions("POST", result, headers, true);
   return fetch(API_URL + "/results", options).then(handleHttpErrors);
+}
+
+async function getResultById(id: number): Promise<Result> {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  const options = makeOptions("GET", null, headers, true);
+  return fetch(API_URL + "/results/" + id, options).then(handleHttpErrors);
 }
 
 async function createDiscipline(discipline: Discipline): Promise<Discipline> {
@@ -128,6 +140,7 @@ export {
   getParticipants,
   getParticipantById,
   createResult,
+  getResultById,
   createDiscipline,
   createParticipant,
   updateResult,
